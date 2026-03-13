@@ -1,0 +1,32 @@
+/* 自定义 Aurora 文章封面 & 顶部 Banner 颜色 */
+
+/* 顶部整块 Banner 使用当前主题渐变色 */
+.app-banner-image {
+  background-image: linear-gradient(
+    130deg,
+    #f7971e,
+    #ffd200 41.07%,
+    #ff6e7f 76.05%
+  ) !important;
+}
+
+/*
+  没有自定义封面的文章卡片：
+  在 .article-thumbnail 容器上设置默认背景图（兜底）
+  DOM 结构：.article-thumbnail > img + span.thumbnail-screen
+*/
+.article-thumbnail,
+.feature-thumbnail {
+  background-image: url('/images/default_cover.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/*
+  隐藏主题内置默认封面图（dccf965f.jpg），露出上方自定义背景
+  有自定义封面的文章 img.src 不含 dccf965f，不受影响
+*/
+.article-thumbnail img[src*="dccf965f"],
+.feature-thumbnail img[src*="dccf965f"] {
+  opacity: 0 !important;
+}

@@ -1,0 +1,184 @@
+#! ---------------------------------------------------------------
+#! Aurora 主题配置 (在博客根目录修改，勿改 node_modules)
+#! 文档 https://aurora.tridiamond.tech/guide/configuration.html
+#! ---------------------------------------------------------------
+
+#! ---------------------------------------------------------------
+#! 站点信息
+#! ---------------------------------------------------------------
+site:
+  subtitle: REXO
+  author: Rex Wang          # 与 _config.yml 的 author 对应
+  nick: Rex
+  description: ''
+  link: '/'
+  language: zh-CN           # 可选 en / zh-CN 等
+  multi_language: true
+  logo:
+  avatar: /images/head.jpg
+  beian:
+    number: ''
+    link: ''
+  police_beian:
+    number: ''
+    link: ''
+  # 博客开始日期 YYYY-MM-DD
+  started_date:
+  # 文章 URL：uid=唯一ID，slug=基于标题 (默认 slug)
+  pathSlug: 'slug'
+
+#! ---------------------------------------------------------------
+#! 多作者（可选）
+#! ---------------------------------------------------------------
+authors:
+  # 示例:
+  # myname:
+  #   name: 显示名
+  #   avatar: 头像URL
+  #   link: 个人链接
+  #   description: 简介
+  #   socials:
+  #     github: https://github.com/xxx
+
+#! ---------------------------------------------------------------
+#! 导航菜单
+#! ---------------------------------------------------------------
+menu:
+  About: true
+  Tags: true
+  Archives: true
+  Friends: false
+
+#! ---------------------------------------------------------------
+#! 主题外观
+#! ---------------------------------------------------------------
+theme:
+  dark_mode: true
+  profile_shape: rounded   # circle | diamond | rounded
+  feature: true            # 是否显示精选/置顶
+  gradient:
+    color_1: '#f7971e'
+    color_2: '#ffd200'
+    color_3: '#ff6e7f'
+
+#! ---------------------------------------------------------------
+#! 社交链接（可选）
+#! ---------------------------------------------------------------
+socials:
+  customs: {}
+  # 示例:
+  # customs:
+  #   bilibili:
+  #     icon: far fa-address-book
+  #     link: https://www.bilibili.com
+
+#! ---------------------------------------------------------------
+#! 站点 Meta（必填，否则会报错）
+#! ---------------------------------------------------------------
+site_meta:
+  cdn: cn                   # cn | 其他，用于 CDN/静态资源
+  favicon:
+  description: ''
+  keywords: ''
+  author: ''
+
+#! ---------------------------------------------------------------
+#! 评论插件（按需开启其一）
+#! ---------------------------------------------------------------
+gitalk:
+  enable: false
+  autoExpand: true
+  clientID: ''
+  clientSecret: ''
+  repo: ''
+  owner: ''
+  admin: ['']
+  id: uid
+  language: zh-CN
+  distractionFreeMode: true
+  recentComment: true
+  proxy: ''
+
+valine:
+  enable: false
+  app_id: ''
+  app_key: ''
+  avatar: ''
+  placeholder: 留下你的想法~
+  visitor: true
+  lang: zh-CN
+  avatarForce: false
+  meta: ['nick', 'mail']
+  requiredFields: ['nick', 'mail']
+  admin: ''
+  recentComment: true
+
+twikoo:
+  enable: false
+  recentComment: true
+  envId: ''
+  lang: 'zh-CN'
+
+waline:
+  enable: false
+  recentComment: true
+  reaction: false
+  login: 'disable'
+  meta: ['nick', 'mail']
+  requiredMeta: ['nick', 'mail']
+  commentSorting: 'latest'
+  wordLimit: 0
+  imageUploader: false
+  pageSize: 10
+  serverURL: ''
+
+#! ---------------------------------------------------------------
+#! 其他
+#! ---------------------------------------------------------------
+busuanzi:
+  enable: false
+
+copy_protection:
+  enable: true
+  author:
+    cn: 作者
+    en: Author
+  link:
+    cn: 本文来自于
+    en: Article is from
+  license:
+    cn: 博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议
+    en: This content is shared under the CC BY-NC-SA 4.0 protocol (Non-Commercial)
+
+aurora_bot:
+  enable: false
+  locale: zh-CN
+  bot_type: dia
+  tips: []
+
+injects:
+  scripts: []
+  css:
+    - >-
+      <style>
+      .app-banner-image{background-image:linear-gradient(130deg,#f7971e,#ffd200 41.07%,#ff6e7f 76.05%)!important;}
+      .article-thumbnail,.feature-thumbnail{background-image:url('/images/default_cover.png')!important;background-size:cover!important;background-position:center!important;}
+      .article-thumbnail img[src*="dccf965f"],.feature-thumbnail img[src*="dccf965f"]{opacity:0!important;}
+      </style>
+
+footer_links: []
+# 示例:
+# footer_links:
+#   - title: 友链
+#     links:
+#       - title: 某站
+#         url: https://example.com
+#       - title: Friends
+#         mode: 'links'
+
+#! ---------------------------------------------------------------
+#! 代码高亮 Shiki
+#! ---------------------------------------------------------------
+shiki:
+  enable: true
+  backgroundColor: "#1a1a1a"
