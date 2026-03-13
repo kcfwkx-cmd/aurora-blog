@@ -2,7 +2,7 @@
 title: Hexo博客的结构与逻辑
 date: 2026-03-10
 categories: 学点没用的
-feature: true
+feature: false
 tags:
   - Hexo
   - 建站

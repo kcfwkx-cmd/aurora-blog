@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:aurora.tridiamond.tech)",
+      "Bash(npx playwright:*)",
+      "Bash(node:*)",
+      "Bash(hexo:*)",
+      "Bash(curl:*)",
+      "Bash(npx kill-port:*)",
+      "Bash(grep:*)"
+    ]
+  }
+}

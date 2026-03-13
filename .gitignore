@@ -2,3 +2,7 @@ node_modules/
 public/
 db.json
 .deploy*/
+.browser_ws
+screenshots/
+.cursor/
+*.log
