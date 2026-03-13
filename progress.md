@@ -44,3 +44,18 @@
 ### 待办
 - [ ] 完善站点信息：`_config.yml` 的 `title / url / description`
 - [ ] 按需为文章设置分类/标签/摘要/封面图
+
+---
+
+## 2026-03-13（补录）
+
+### 修改点
+- 完善 `CLAUDE.md` Playwright 截图流程：明确读 `.browser_ws` → connectOverCDP → 失败时重启并回写端点，截图后只关 page 不关浏览器 [Claude]
+- 新增 `CLAUDE.md` 文件操作范围规范：只在项目根目录内读写，禁止访问系统临时目录 [Claude]
+- 新增 `CLAUDE.md` Debug 规范：优先用 Playwright 截图，不用临时文件传递结果 [Claude]
+- 修改 `CLAUDE.md` 终端命令约定：命令由 Claude 执行，用户只负责确认 [Claude]
+- 新增 `CLAUDE.md` 调试脚本目录规范：统一放 `tools/`，禁止放 `scripts/`（Hexo 会自动执行）[Claude]
+- 修复 `_config.aurora.yml` `dark_mode: auto` → `dark_mode: true`，强制深色模式 [Claude]
+- 修复顶部 banner 紫色背景：根源是主题 CSS 变量 `--background-primary-alt: #0d0b12`（紫调深色），通过 `body#body-container.theme-dark{background:#1a1a1a!important;}` 覆盖 [Claude]
+- 修复 banner 渐变 CSS 写反问题：`.app-banner-image` 改回 `opacity:0`（隐藏默认紫调 banner 图），`.app-banner-screen` 改回 `opacity:1`（显示橙色渐变）[Claude]
+- 新增 `tools/screenshot.js`、`tools/check_body_bg.js`、`tools/check_purple.js`：可复用的 Playwright 调试工具 [Claude]

@@ -8,8 +8,8 @@
 #! ---------------------------------------------------------------
 site:
   subtitle: REXO
-  author: Rex Wang          # 与 _config.yml 的 author 对应
-  nick: Rex
+  author: REXO          # 与 _config.yml 的 author 对应
+  nick: 我是王大头
   description: ''
   link: '/'
   language: zh-CN           # 可选 en / zh-CN 等
@@ -57,9 +57,15 @@ theme:
   profile_shape: rounded   # circle | diamond | rounded
   feature: true            # 是否显示精选/置顶
   gradient:
-    color_1: '#f7971e'
-    color_2: '#ffd200'
-    color_3: '#ff6e7f'
+    color_1: '#ff416c'
+    color_2: '#ff4b2b'
+    color_3: '#f9d423'
+    # 备选配色方案：
+    # 春_spring:   color_1: '#f953c6'  color_2: '#b91d73'  color_3: '#43e97b'
+    # 夏_summer:   color_1: '#4facfe'  color_2: '#00f2fe'  color_3: '#43e97b'
+    # 秋_autumn:   color_1: '#f7971e'  color_2: '#e52d27'  color_3: '#ffd200'
+    # 冬_winter:   color_1: '#a1c4fd'  color_2: '#667eea'  color_3: '#c2e9fb'
+    # 赛博霓虹:    color_1: '#7f00ff'  color_2: '#00ffcc'  color_3: '#ff0080'
 
 #! ---------------------------------------------------------------
 #! 社交链接（可选）
@@ -161,9 +167,13 @@ injects:
   css:
     - >-
       <style>
-      .app-banner-image{background-image:linear-gradient(130deg,#f7971e,#ffd200 41.07%,#ff6e7f 76.05%)!important;}
+      body#body-container.theme-dark{background:#1a1a1a!important;}
       .article-thumbnail,.feature-thumbnail{background-image:url('/images/default_cover.png')!important;background-size:cover!important;background-position:center!important;}
       .article-thumbnail img[src*="dccf965f"],.feature-thumbnail img[src*="dccf965f"]{opacity:0!important;}
+      .thumbnail-screen{opacity:0!important;}
+      .app-banner-image{opacity:0!important;}
+      .app-banner-screen{opacity:1!important;}
+      .light .feature-article .feature-thumbnail::after,.light .article .article-thumbnail::after,.light .article-thumbnail::after,.light .feature-thumbnail::after{opacity:0!important;}
       </style>
 
 footer_links: []

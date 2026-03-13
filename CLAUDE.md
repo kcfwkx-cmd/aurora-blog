@@ -5,7 +5,14 @@
 ## 开工约定（每次开始前）
 
 - 你发 **"开工"**：先读 `CLAUDE.md`、`aurora.md`、`progress.md`，再处理新任务
-- 你发 **"收工"**：把当天改动/结论补记到 `progress.md`（涉及主题行为改变时同步更新 `aurora.md`）
+- 你发 **"收工"**：把当天改动/结论补记到 `progress.md`（涉及主题行为改变时同步更新 `aurora.md`），然后提醒执行 git commit
+- **阶段性改动完成后**（不必等收工）：提醒执行 git commit，message 简明描述做了什么
+- **Playwright 截图**：按以下固定流程执行，不得跳步：
+  1. 读取 `.browser_ws` 文件，获取 WebSocket 端点
+  2. 用 `chromium.connectOverCDP(wsEndpoint)` 尝试连接已有浏览器
+  3. **连接成功**：直接在已有浏览器里打开新 page，导航到目标 URL，截图，截图后关闭 page（不关浏览器）
+  4. **连接失败**（浏览器已关）：`chromium.launch({ headless: false })` 启动新实例，把 `browser.wsEndpoint()` 写回 `.browser_ws`，再执行截图，截图后关闭 page（不关浏览器）
+  5. **严禁**：不读 `.browser_ws` 就直接截图；每次截图都新开浏览器实例
 
 ## 修改优先级（从高到低）
 
@@ -17,8 +24,7 @@
 
 ## 终端命令约定
 
-- **终端命令由你执行**（`hexo clean; hexo g; hexo s` 等）
-- 我提供：需要跑的命令（PowerShell 兼容写法）+ 改完后提醒运行哪条命令
+- **终端命令由用户执行**：Ctrl+C 停服务器、`hexo clean && hexo g && hexo s` 均由用户手动运行；Claude 负责告知"现在需要重启"或"可以执行了"。
 
 ## 需求描述建议
 
@@ -29,6 +35,9 @@
 ## 工作规范
 
 - 修改 `_config.aurora.yml` 之前，必须先查阅 `aurora-docs.md` 确认字段是否存在及正确用法，不确定不乱加。
+- **文件操作范围**：所有文件读写只在项目根目录 `D:/rrwang/contents/aurora` 内进行，禁止读写系统临时目录或其他路径。
+- **Debug 优先用截图**：调试时优先用 Playwright 启动 Chromium 截图查看实际效果，不用临时文件传递结果。
+- **调试脚本目录**：Playwright/Node.js 调试脚本统一放 `tools/`，**严禁放 `scripts/`**（Hexo 会自动执行 `scripts/` 下所有 `.js` 文件，会破坏构建）。
 
 ## 记录规范
 
