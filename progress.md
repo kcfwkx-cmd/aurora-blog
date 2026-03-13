@@ -44,6 +44,7 @@
 ### 待办
 - [ ] 完善站点信息：`_config.yml` 的 `title / url / description`
 - [ ] 按需为文章设置分类/标签/摘要/封面图
+- [ ] 推送到 GitHub（网络问题暂缓，remote 已配置好）
 
 ---
 
