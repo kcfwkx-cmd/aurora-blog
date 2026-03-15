@@ -113,5 +113,31 @@
 - 顶部 banner 渐变色（熔岩橙红）正常 ✓
 - 所谓"灰色 banner"确认为主题下拉区域的默认样式，非异常
 
+---
+
+## 2026-03-15（续）
+
+### 修改点
+
+#### About 页三张跳转卡片
+- 修改 `source/about/index.md`：加入三张卡片 HTML，`type: about` [Claude]
+- 新增 `source/about-life/index.md`、`source/about-insurance/index.md`、`source/about-learning/index.md` [Claude]
+- **根因排查**：Aurora Vue Router 路由 `/page/:slug` 不匹配带斜杠路径，子页面需平铺到顶层目录 [Claude]
+- 修复卡片链接：`/about/life/` → `/page/about-life/` 等 [Claude]
+
+#### Services 页面
+- `source/services/index.md` 补充 `type: page` [Claude]
+- 菜单路径 `/services` → `/page/services` [Claude]
+
+#### 随机看一篇
+- 确认 Aurora 无内置 random 路由，改用 JS 注入实现 [Claude]
+- 从菜单移除"随机看一篇"，改为注入"随便看一篇"按钮 [Claude]
+- 按钮位置：分类筛选条（`ul.tab`）上方 [Claude]
+- 按钮样式：EDITOR'S SELECTION 渐变文字风格 + 圆角胶囊背景 [Claude]
+- 跳转方式：`fetch /api/search.json` 取随机 slug，`router.push('/post/'+slug)` [Claude]
+
+#### 封面图加载优化
+- 改用 CSS `:has()` 选择器，仅对含 `dccf965f` 的卡片设置默认封面背景，有自定义封面的文章不再预载默认图 [Claude]
+
 ### 待办
-- [ ] 推送今日改动到 GitHub
+- [ ] 推送今日改动到 GitHub ← 当前执行中

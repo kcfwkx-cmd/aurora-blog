@@ -52,16 +52,10 @@ menu:
       en: 'About Me'
   services:
     name: '提供的服务'
-    path: '/services'
+    path: '/page/services'
     i18n:
       zh-CN: '提供的服务'
       en: 'Services'
-  random:
-    name: '随机看一篇'
-    path: '/random'
-    i18n:
-      zh-CN: '随机看一篇'
-      en: 'Random'
 
 #! ---------------------------------------------------------------
 #! 主题外观
@@ -177,12 +171,48 @@ aurora_bot:
   tips: []
 
 injects:
-  scripts: []
+  scripts:
+    - >-
+      <script>
+      (function(){
+        function goRandom(){
+          fetch('/api/search.json')
+            .then(function(r){return r.json();})
+            .then(function(posts){
+              if(posts&&posts.length>0){
+                var post=posts[Math.floor(Math.random()*posts.length)];
+                var app=document.querySelector('#app');
+                var router=app&&app.__vue_app__&&app.__vue_app__.config.globalProperties.$router;
+                if(router) router.push('/post/'+post.slug);
+              }
+            });
+        }
+        function tryInsertBtn(){
+          var p=window.location.pathname;
+          if(p!=='/'&&p!=='/index.html') return;
+          if(document.getElementById('ob-random-btn')) return;
+          var tab=document.querySelector('ul.tab');
+          if(!tab) return;
+          var anchor=tab.parentElement;
+          var btn=document.createElement('div');
+          btn.id='ob-random-btn';
+          btn.style.cssText='display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1rem;padding:.45rem 1.1rem;border-radius:9999px;background:var(--bg-secondary,#1d2433);cursor:pointer;transition:opacity .15s;';
+          btn.innerHTML='<svg style="height:1em;width:1em;flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="url(#rg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff416c"/><stop offset="100%" stop-color="#f9d423"/></linearGradient></defs><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>'
+            +'<span style="font-size:.95rem;font-weight:700;letter-spacing:.03em;background:linear-gradient(130deg,#ff416c,#ff4b2b 41%,#f9d423 76%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">随便看一篇</span>';
+          btn.onmouseover=function(){this.style.opacity='.75';};
+          btn.onmouseout=function(){this.style.opacity='1';};
+          btn.addEventListener('click',goRandom);
+          anchor.parentElement.insertBefore(btn,anchor);
+        }
+        setInterval(tryInsertBtn,400);
+      })();
+      </script>
   css:
     - >-
       <style>
       body#body-container.theme-dark{background:#1a1a1a!important;}
-      .article-thumbnail,.feature-thumbnail{background-image:url('/images/default_cover.png')!important;background-size:cover!important;background-position:center!important;}
+      .article-thumbnail,.feature-thumbnail{background-color:#2a2a2a!important;}
+      .article-thumbnail:has(img[src*="dccf965f"]),.feature-thumbnail:has(img[src*="dccf965f"]){background-image:url('/images/default_cover.png')!important;background-size:cover!important;background-position:center!important;}
       .article-thumbnail img[src*="dccf965f"],.feature-thumbnail img[src*="dccf965f"]{opacity:0!important;}
       .thumbnail-screen{opacity:0!important;}
       .app-banner-image{opacity:0!important;}
