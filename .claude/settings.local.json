@@ -7,7 +7,12 @@
       "Bash(hexo:*)",
       "Bash(curl:*)",
       "Bash(npx kill-port:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(ssh -T git@github.com)",
+      "Read(//c/Users/kcfwk/.ssh/**)",
+      "Bash(git config:*)",
+      "Bash(node -e \":*)",
+      "Bash(python:*)"
     ]
   }
 }

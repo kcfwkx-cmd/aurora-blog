@@ -60,3 +60,58 @@
 - 修复顶部 banner 紫色背景：根源是主题 CSS 变量 `--background-primary-alt: #0d0b12`（紫调深色），通过 `body#body-container.theme-dark{background:#1a1a1a!important;}` 覆盖 [Claude]
 - 修复 banner 渐变 CSS 写反问题：`.app-banner-image` 改回 `opacity:0`（隐藏默认紫调 banner 图），`.app-banner-screen` 改回 `opacity:1`（显示橙色渐变）[Claude]
 - 新增 `tools/screenshot.js`、`tools/check_body_bg.js`、`tools/check_purple.js`：可复用的 Playwright 调试工具 [Claude]
+
+---
+
+## 2026-03-13（推送）
+
+### 修改点
+- 更新 `.gitignore`：新增排除 `.browser_ws`、`screenshots/`、`.cursor/`、`*.log` [Claude]
+- git remote 从 SSH 改为 HTTPS：`https://github.com/kcfwkx-cmd/aurora-blog.git` [手动]
+- git 全局代理从 7890 更新为 6789 [手动]
+- 首次推送到 GitHub，main 分支上传成功 ✓ [手动]
+
+### 待办
+- [ ] 完善站点信息：`_config.yml` 的 `title / url / description / author`
+- [ ] 按需为文章设置分类/标签/摘要/封面图
+
+---
+
+## 2026-03-14
+
+### 今日目标
+- 修复导航栏菜单项不显示问题（只剩首页）
+- 修复移动端侧边栏菜单文字重复问题（"首页HOME"）
+
+### 修改点
+
+#### 菜单项不显示
+- 新增 `source/about/index.md`、`source/services/index.md`、`source/random/index.md`：三个自定义页面 [手动/Claude]
+- 修改 `_config.aurora.yml` menu：添加 `about / services / random` 三个自定义菜单项 [Claude]
+- **根因排查**：主题 JS 渲染菜单时，`multi_language: true` 下始终读 `c.i18n[locale]`，自定义项没有 `i18n` 字段导致渲染空字符串 [Claude]
+- **修复**：给三个自定义菜单项补充 `i18n` 字段（`zh-CN` / `en`）[Claude]
+
+#### 移动端侧边栏文字重复（"首页HOME"、"我是谁我是谁"）
+- **根因**：移动端侧边栏渲染逻辑是两个独立 span 并排输出，`zh-CN` 下第一个 span 显示 `i18n['zh-CN']`，第二个 span 因 zh-TW/en 条件不满足永远兜底显示 `h.name`，导致两段文字拼在一起
+- **修复**：向 `injects.css` 注入 `.App-Mobile-sidebar li > div > span + span{display:none!important;}` 隐藏兜底 span [Claude]
+- 该 CSS 只在 zh-CN 时生效（两个相邻 span），zh-TW/en 只有一个 span 不受影响
+
+### 遗留问题（明日继续）
+- [x] **首页顶部 header 显示异常**：2026-03-15 截图确认正常，顶部灰色为主题下拉默认样式，非 bug ✓
+- [ ] 推送今日改动到 GitHub
+
+---
+
+## 2026-03-15
+
+### 今日目标
+- 确认并修复导航栏遗留问题
+
+### 结果
+- 截图确认：桌面端导航栏 4 个菜单项（首页/我是谁/提供的服务/随机看一篇）全部正常显示 ✓
+- 移动端侧边栏 `span+span` CSS 修复已生效 ✓
+- 顶部 banner 渐变色（熔岩橙红）正常 ✓
+- 所谓"灰色 banner"确认为主题下拉区域的默认样式，非异常
+
+### 待办
+- [ ] 推送今日改动到 GitHub

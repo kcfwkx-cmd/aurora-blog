@@ -10,7 +10,7 @@ site:
   subtitle: REXO
   author: REXO          # 与 _config.yml 的 author 对应
   nick: 我是王大头
-  description: ''
+  description: '有用有趣，长期服务'
   link: '/'
   language: zh-CN           # 可选 en / zh-CN 等
   multi_language: true
@@ -44,10 +44,24 @@ authors:
 #! 导航菜单
 #! ---------------------------------------------------------------
 menu:
-  About: true
-  Tags: true
-  Archives: true
-  Friends: false
+  about:
+    name: '我是谁'
+    path: '/about'
+    i18n:
+      zh-CN: '我是谁'
+      en: 'About Me'
+  services:
+    name: '提供的服务'
+    path: '/services'
+    i18n:
+      zh-CN: '提供的服务'
+      en: 'Services'
+  random:
+    name: '随机看一篇'
+    path: '/random'
+    i18n:
+      zh-CN: '随机看一篇'
+      en: 'Random'
 
 #! ---------------------------------------------------------------
 #! 主题外观
@@ -174,6 +188,9 @@ injects:
       .app-banner-image{opacity:0!important;}
       .app-banner-screen{opacity:1!important;}
       .light .feature-article .feature-thumbnail::after,.light .article .article-thumbnail::after,.light .article-thumbnail::after,.light .feature-thumbnail::after{opacity:0!important;}
+      .text-invert.font-extrabold.text-white{font-size:0.6rem!important;}
+      .text-invert.text-xl.font-extrabold{font-size:1.5rem!important;}
+      .App-Mobile-sidebar li > div > span + span{display:none!important;}
       </style>
 
 footer_links: []
