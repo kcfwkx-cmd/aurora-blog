@@ -140,4 +140,32 @@
 - 改用 CSS `:has()` 选择器，仅对含 `dccf965f` 的卡片设置默认封面背景，有自定义封面的文章不再预载默认图 [Claude]
 
 ### 待办
-- [ ] 推送今日改动到 GitHub ← 当前执行中
+- [x] 推送今日改动到 GitHub ✓
+
+---
+
+## 2026-03-16
+
+### 修改点
+
+#### 修复"随便看一篇"按钮在 50% 缩放时异常放大
+- **根因**：按钮被插入到父级 flex 容器中，`align-items:stretch`（默认值）将按钮高度拉伸至父容器全高，叠加 `border-radius:9999px` 后变成巨大半圆
+- **修复**：为按钮加 `align-self:flex-start` 阻止 flex 拉伸，`height:auto` 明确约束高度 [Claude]
+- **顺带**：将按钮尺寸相关单位从 `rem/em` 改为 `px`（gap/padding/font-size/SVG 尺寸）[Claude]
+- **验证**：Playwright 宽视口模拟（2880px），按钮高度从 7724px 恢复正常 44px ✓
+
+#### 修复"随便看一篇"按钮破坏文章列表布局
+- **根因**：按钮被插入到 `#article-list.main-grid`（2列 CSS Grid）的直接子节点，变成第3个 grid item，导致主内容列被挤到窄列（89px）[Claude]
+- **修复**：改为插入到 `.ob-gradient-plate`（EDITOR'S SELECTION 框）内部，不再影响 Grid 结构 [Claude]
+
+#### 随便看一篇按钮最终位置与样式
+- 位置：EDITOR'S SELECTION 卡片底部，"推荐文章"文字与边框底部之间，左对齐 `left:27px; bottom:36px` [Claude]
+- 图标：替换为 Font Awesome 鸽子 SVG，主题渐变配色（玫红→橙红→金黄）[Claude]
+
+#### 首页标签页标题去重（"REXO | REXO" → "REXO"）
+- **根因**：Aurora `getTitle()` 将 `this.title` 和 `site.subtitle` 均设为 "REXO" 拼接 [Claude]
+- **修复**：注入 MutationObserver，检测到 `X | X` 格式自动去重 [Claude]
+
+#### Favicon 更新
+- 配置 `site_meta.favicon: /images/logo-1.png`（深色圆角方块 R 字 logo）[Claude]
+- 新增 `source/favicon.ico`、`source/favicon.svg`（尝试透明底方案，最终用 logo-1.png）[Claude]

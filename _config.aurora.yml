@@ -14,7 +14,7 @@ site:
   link: '/'
   language: zh-CN           # 可选 en / zh-CN 等
   multi_language: true
-  logo:
+  logo: 
   avatar: /images/head.jpg
   beian:
     number: ''
@@ -91,7 +91,7 @@ socials:
 #! ---------------------------------------------------------------
 site_meta:
   cdn: cn                   # cn | 其他，用于 CDN/静态资源
-  favicon:
+  favicon: /images/logo-1.png
   description: ''
   keywords: ''
   author: ''
@@ -191,20 +191,37 @@ injects:
           var p=window.location.pathname;
           if(p!=='/'&&p!=='/index.html') return;
           if(document.getElementById('ob-random-btn')) return;
-          var tab=document.querySelector('ul.tab');
-          if(!tab) return;
-          var anchor=tab.parentElement;
+          var plate=document.querySelector('.ob-gradient-plate');
+          if(!plate) return;
+          var card=plate.parentElement;
           var btn=document.createElement('div');
           btn.id='ob-random-btn';
-          btn.style.cssText='display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1rem;padding:.45rem 1.1rem;border-radius:9999px;background:var(--bg-secondary,#1d2433);cursor:pointer;transition:opacity .15s;';
-          btn.innerHTML='<svg style="height:1em;width:1em;flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="url(#rg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff416c"/><stop offset="100%" stop-color="#f9d423"/></linearGradient></defs><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>'
-            +'<span style="font-size:.95rem;font-weight:700;letter-spacing:.03em;background:linear-gradient(130deg,#ff416c,#ff4b2b 41%,#f9d423 76%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">随便看一篇</span>';
+          btn.style.cssText='position:absolute;bottom:36px;left:27px;display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:9999px;background:rgba(0,0,0,0.45);cursor:pointer;transition:opacity .15s;z-index:20;white-space:nowrap;';
+          btn.innerHTML='<svg style="height:18px;width:18px;flex-shrink:0;" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="rg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff416c"/><stop offset="50%" stop-color="#ff4b2b"/><stop offset="100%" stop-color="#f9d423"/></linearGradient></defs><path fill="url(#rg2)" d="M560 128C573.2 128 580.7 143.1 572.8 153.6L544 192L544 368C544 447.5 479.5 512 400 512L288 512L241.7 558.3C231.3 568.7 215.2 570.7 202.6 563.1L105.5 504.9C88.5 494.7 90.5 469.4 108.9 462L224 416C87.8 375.1 71.5 233.8 86 159.7C89.6 141.9 109.3 135.4 125.3 144.2L384 288L384 208C384 163.8 419.8 128 464 128L560 128zM464 184C450.7 184 440 194.7 440 208C440 221.3 450.7 232 464 232C477.3 232 488 221.3 488 208C488 194.7 477.3 184 464 184zM246.5 54.4C258.9 40.7 279.8 45.5 289 61.5L345.4 159.8C339.6 174.2 336.2 189.9 336 206.3L202.1 132C212.2 100.4 229.1 73.6 246.5 54.4z"/></svg>'
+            +'<span style="font-size:13px;font-weight:700;letter-spacing:.03em;background:linear-gradient(130deg,#ff416c,#ff4b2b 41%,#f9d423 76%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">随便看一篇</span>';
           btn.onmouseover=function(){this.style.opacity='.75';};
           btn.onmouseout=function(){this.style.opacity='1';};
           btn.addEventListener('click',goRandom);
-          anchor.parentElement.insertBefore(btn,anchor);
+          card.appendChild(btn);
         }
         setInterval(tryInsertBtn,400);
+      })();
+      </script>
+    - >-
+      <script>
+      (function(){
+        function fixTitle(){
+          var t=document.title;
+          if(!t) return;
+          var sep=t.indexOf(' | ');
+          if(sep===-1) return;
+          var left=t.slice(0,sep);
+          var right=t.slice(sep+3);
+          if(left===right) document.title=left;
+        }
+        var obs=new MutationObserver(fixTitle);
+        obs.observe(document.head,{childList:true,subtree:true,characterData:true});
+        fixTitle();
       })();
       </script>
   css:
